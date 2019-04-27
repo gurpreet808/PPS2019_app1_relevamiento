@@ -11,18 +11,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
   public splash = true;
 
-  public appPages = [
-    {
-      title: 'Home',
-      url: '/home',
-      icon: 'home'
-    },
-    {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
-    }
-  ];
+  public appPages = [];
 
   constructor(
     private platform: Platform,
@@ -31,6 +20,18 @@ export class AppComponent {
   ) {
     this.initializeApp();
     setTimeout(() => this.splash = false, 5000);
+    this.appPages = [
+      {
+        title: 'Iniciar sesión',
+        url: '/login',
+        icon: 'home'
+      },
+      {
+        title: 'Registrarse',
+        url: '/registrarse',
+        icon: 'list'
+      }
+    ];
   }
 
   initializeApp() {
