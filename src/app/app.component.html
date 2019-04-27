@@ -1,5 +1,11 @@
-<ion-app>
-  <ion-split-pane>
+<ion-app [ngStyle]="estilo_app()">
+  
+  <div *ngIf="splash">
+    <!-- Aquí va el splashscreen -->
+    <app-splash-screen></app-splash-screen>
+  </div>
+
+  <ion-split-pane *ngIf="!splash">
     <ion-menu>
       <ion-header>
         <ion-toolbar>
@@ -19,6 +25,7 @@
         </ion-list>
       </ion-content>
     </ion-menu>
+    
     <ion-router-outlet main></ion-router-outlet>
   </ion-split-pane>
 </ion-app>

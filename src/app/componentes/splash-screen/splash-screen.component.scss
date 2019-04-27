@@ -1,0 +1,32 @@
+.mainBody {
+    text-align: center;
+}
+
+.subBody {
+    position: absolute;
+    top: 65%;
+    left: 0;
+    text-align: center;
+    bottom: 0;
+    right: 0;
+}
+
+.iconoPrincipal{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30%;
+}
+
+.girar {
+    -webkit-animation: rotation 2s infinite linear;
+}
+
+@-webkit-keyframes rotation {
+    from {
+            -webkit-transform: rotate(0deg);
+    }
+    to {
+            -webkit-transform: rotate(359deg);
+    }
+}
