@@ -9,9 +9,39 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <input type="email" name="correo" id="correo" [(ngModel)]="correo">
+<ion-content padding>
+  <!-- input type="email" name="correo" id="correo" [(ngModel)]="correo">
   <input type="text" name="clave" id="clave" [(ngModel)]="clave">
-  <button (click)="iniciar_sesion()">Login</button>
+  <button (click)="iniciar_sesion()">Login</button> -->
+
+  <ion-grid>
+    <form [formGroup]="loginForm" (ngSubmit)="iniciar_sesion()">
+      <ion-item>
+        <ion-label position="floating">Correo:</ion-label>
+        <ion-input type="text" formControlName="correo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Clave:</ion-label>
+        <ion-input type="text" formControlName="clave"></ion-input>
+      </ion-item>
+    </form>
+    <ion-row padding>
+      <ion-col size=6>
+        <ion-button shape="square" color="primary" expand="block" [disabled]="!loginForm.valid" (click)="iniciar_sesion()">Iniciar sesión</ion-button>
+      </ion-col>
+      <ion-col size=6>
+        <ion-button shape="square" color="light" expand="block" (click)="registrarme()">Registrarme</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row padding text-center justify-content-center align-items-center style="background-color: #9b9b9b71;">
+      <h3 ion-col size=12>Usuarios de prueba</h3>
+      <ion-col text-center no-padding *ngFor="let item of usuariosTest; let i=index">
+        <ion-button color="dark" shape="square" (click)="elegirTest(i)">{{ item.correo }}</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
 
 </ion-content>

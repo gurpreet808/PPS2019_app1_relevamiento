@@ -10,8 +10,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabaseModule } from "angularfire2/database";
-import { SplashScreenComponent } from "./componentes/splash-screen/splash-screen.component";
 import { FIREBASE_CONFIG } from './app.firebase.config';
+import { SplashScreenComponent } from "./componentes/splash-screen/splash-screen.component";
 
 @NgModule({
   declarations: [

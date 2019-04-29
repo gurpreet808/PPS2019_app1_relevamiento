@@ -22,18 +22,19 @@ export class UsuarioService {
         console.log(usuario.length);
         if(usuario.length == 0){
           this.mostrarMensaje("ERROR! No se encuentra ese mail");
+          this.logueado.next(false);
         } else {
           if (usuario[0].clave == clave) {
             this.mostrarMensaje("Bien! te logueaste!");
+            this.logueado.next(true);
           } else {
             this.mostrarMensaje("ERROR! Correo y clave inválidos");
+            this.logueado.next(false);
           }
         }
         logueoQuery.unsubscribe();
       }
     );
-
-    
   }
 
   async mostrarMensaje(text: string) {
