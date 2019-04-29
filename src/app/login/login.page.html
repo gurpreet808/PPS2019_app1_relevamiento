@@ -10,5 +10,8 @@
 </ion-header>
 
 <ion-content>
+  <input type="email" name="correo" id="correo" [(ngModel)]="correo">
+  <input type="text" name="clave" id="clave" [(ngModel)]="clave">
+  <button (click)="iniciar_sesion()">Login</button>
 
 </ion-content>

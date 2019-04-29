@@ -24,7 +24,7 @@ export class AppComponent {
       {
         title: 'Iniciar sesión',
         url: '/login',
-        icon: 'home'
+        icon: 'log-in'
       },
       {
         title: 'Registrarse',
