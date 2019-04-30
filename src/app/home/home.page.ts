@@ -10,9 +10,14 @@ import { Router } from '@angular/router';
 export class HomePage {
 
   constructor(servUsuario: UsuarioService, router: Router){
-    if (servUsuario.logueado.value == false) {
-      router.navigateByUrl('/login');
-    }
+    //Cambiar esto cuando pongamos el Guard
+    servUsuario.logueado.subscribe(
+      valor =>{
+        if (valor == false) {
+          router.navigateByUrl('/login');
+        }
+      }
+    );
   }
 
 }

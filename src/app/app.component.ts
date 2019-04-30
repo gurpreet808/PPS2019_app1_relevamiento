@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 //import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { UsuarioService } from './servicios/usuario.service';
 
 @Component({
   selector: 'app-root',
@@ -16,22 +17,42 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     //private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private servUsuario: UsuarioService
   ) {
     this.initializeApp();
     setTimeout(() => this.splash = false, 5000);
-    this.appPages = [
-      {
-        title: 'Iniciar sesión',
-        url: '/login',
-        icon: 'log-in'
-      },
-      {
-        title: 'Registrarse',
-        url: '/registrarse',
-        icon: 'list'
+    this.servUsuario.logueado.subscribe(
+      valor =>{
+        if (valor == false) {
+          this.appPages = [
+            {
+              title: 'Iniciar sesión',
+              url: '/login',
+              icon: 'log-in'
+            },
+            {
+              title: 'Registrarse',
+              url: '/registrarse',
+              icon: 'list'
+            }
+          ];
+        } else {
+          this.appPages = [
+            {
+              title: 'Inicio',
+              url: '/',
+              icon: 'home'
+            },
+            {
+              title: 'Lista',
+              url: '/list',
+              icon: 'list'
+            }
+          ];
+        }
       }
-    ];
+    );
   }
 
   initializeApp() {
@@ -49,5 +70,9 @@ export class AppComponent {
       return estilo_splash;
     }
     return {};
+  }
+
+  salir(){
+    this.servUsuario.cerrar_sesion();
   }
 }

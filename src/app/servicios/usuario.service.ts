@@ -19,13 +19,14 @@ export class UsuarioService {
   iniciar_sesion(correo: string, clave: string){
     let logueoQuery = this.db.list('/usuarios', ref => ref.orderByChild("correo").equalTo(correo)).valueChanges().subscribe(
       (usuario: Usuario[]) => {
-        console.log(usuario.length);
+        //console.log(usuario.length);
         if(usuario.length == 0){
           this.mostrarMensaje("ERROR! No se encuentra ese mail");
           this.logueado.next(false);
         } else {
           if (usuario[0].clave == clave) {
             this.mostrarMensaje("Bien! te logueaste!");
+            this.el_usuario = usuario[0];
             this.logueado.next(true);
           } else {
             this.mostrarMensaje("ERROR! Correo y clave inválidos");
@@ -35,6 +36,30 @@ export class UsuarioService {
         logueoQuery.unsubscribe();
       }
     );
+  }
+
+  cerrar_sesion(){
+    this.logueado.next(false);
+  }
+
+  registrar_usuario(un_usuario: Usuario){
+    let itemsRef = this.db.list('usuarios');
+    itemsRef.push(un_usuario)
+    .then( 
+      datos => {
+        //console.log(datos);
+        this.mostrarMensaje("Bien! te registraste!");
+      }
+    )
+    .catch(
+      err => {
+        this.mostrarMensaje("Hubo un error inténtalo de nuevo");
+      }
+    );
+  }
+
+  traer_ultimo_ID(){
+    return this.db.list('/usuarios', ref => ref.orderByChild("id").limitToLast(1)).valueChanges();
   }
 
   async mostrarMensaje(text: string) {
