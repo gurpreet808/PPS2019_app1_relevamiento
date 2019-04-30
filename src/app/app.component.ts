@@ -10,7 +10,7 @@ import { UsuarioService } from './servicios/usuario.service';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  public splash = true;
+  public splash = false;
 
   public appPages = [];
 
@@ -45,9 +45,14 @@ export class AppComponent {
               icon: 'home'
             },
             {
-              title: 'Lista',
-              url: '/list',
-              icon: 'list'
+              title: 'Cosas LINDAS',
+              url: '/lindas',
+              icon: 'happy'
+            },
+            {
+              title: 'Cosas FEAS',
+              url: '/',
+              icon: 'sad'
             }
           ];
         }

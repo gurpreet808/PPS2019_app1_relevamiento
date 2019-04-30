@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
-  constructor(servUsuario: UsuarioService, router: Router){
+  constructor(servUsuario: UsuarioService, public router: Router){
     //Cambiar esto cuando pongamos el Guard
     servUsuario.logueado.subscribe(
       valor =>{
@@ -18,6 +18,10 @@ export class HomePage {
         }
       }
     );
+  }
+
+  navegar(url: string){
+    this.router.navigateByUrl(url);
   }
 
 }
