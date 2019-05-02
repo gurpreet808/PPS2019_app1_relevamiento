@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UsuarioService {
 
-  public logueado = new BehaviorSubject(true);
+  public logueado = new BehaviorSubject(false);
   el_usuario: Usuario;
 
   constructor(public db: AngularFireDatabase, public toastCtrl: ToastController) {

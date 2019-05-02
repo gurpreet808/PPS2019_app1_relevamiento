@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { FIREBASE_CONFIG } from './app.firebase.config';
+import { Camera } from '@ionic-native/camera/ngx';
 import { SplashScreenComponent } from "./componentes/splash-screen/splash-screen.component";
 
 @NgModule({
@@ -29,6 +30,7 @@ import { SplashScreenComponent } from "./componentes/splash-screen/splash-screen
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
