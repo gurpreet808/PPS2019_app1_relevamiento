@@ -3,6 +3,7 @@ import { Usuario } from '../clases/usuario';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { ToastController } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class UsuarioService {
   public logueado = new BehaviorSubject(false);
   el_usuario: Usuario;
 
-  constructor(public db: AngularFireDatabase, public toastCtrl: ToastController) {
+  constructor(public db: AngularFireDatabase, public toastCtrl: ToastController, public router:Router) {
 
   }
 
@@ -25,7 +26,7 @@ export class UsuarioService {
           this.logueado.next(false);
         } else {
           if (usuario[0].clave == clave) {
-            this.mostrarMensaje("Bien! te logueaste!");
+            this.mostrarMensaje("Bien! Te logueaste!");
             this.el_usuario = usuario[0];
             this.logueado.next(true);
           } else {
@@ -48,12 +49,13 @@ export class UsuarioService {
     .then( 
       datos => {
         //console.log(datos);
-        this.mostrarMensaje("Bien! te registraste!");
+        this.mostrarMensaje("Bien! Te registraste! Ahora podés iniciar sesión");
+        this.router.navigateByUrl("/login");
       }
     )
     .catch(
       err => {
-        this.mostrarMensaje("Hubo un error inténtalo de nuevo");
+        this.mostrarMensaje("Hubo un error inténtalo de nuevo...");
       }
     );
   }
@@ -62,10 +64,14 @@ export class UsuarioService {
     return this.db.list('/usuarios', ref => ref.orderByChild("id").limitToLast(1)).valueChanges();
   }
 
+  comprobar_correo(correo: string){
+    return this.db.list('/usuarios', ref => ref.orderByChild("correo").equalTo(correo)).valueChanges();
+  }
+
   async mostrarMensaje(text: string) {
     let toast = await this.toastCtrl.create({
       message: text,
-      duration: 3000
+      duration: 4000
     });
     toast.present();
   }

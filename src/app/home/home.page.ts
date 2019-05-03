@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
-  constructor(servUsuario: UsuarioService, public router: Router){
+  constructor(public servUsuario: UsuarioService, public router: Router){
     //Cambiar esto cuando pongamos el Guard
     servUsuario.logueado.subscribe(
       valor =>{

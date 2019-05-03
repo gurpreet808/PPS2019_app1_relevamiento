@@ -45,7 +45,7 @@ export class LindasPage implements OnInit {
   async mostrarMensaje(text: string) {
     let toast = await this.toastCtrl.create({
       message: text,
-      duration: 3000
+      duration: 4000
     });
     toast.present();
   }

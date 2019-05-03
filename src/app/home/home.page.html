@@ -18,7 +18,7 @@
         <p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>
       </ion-card-content>
     </ion-card> -->
-    <ion-grid>
+    <ion-grid *ngIf="this.servUsuario.logueado.value">
       <ion-row>
         <ion-button style="height: 43.5vh; width:100%;" color="success" (click)="navegar('/lindas')">Cosas LINDAS del edificio</ion-button>
       </ion-row>

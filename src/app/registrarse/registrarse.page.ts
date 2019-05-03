@@ -15,7 +15,7 @@ export class RegistrarsePage implements OnInit {
   public registerForm: FormGroup;
   public un_usuario: Usuario;
   showpass: boolean = false;
-  showpass2: boolean = false;
+  //showpass2: boolean = false;
   ultimoID: number = -1;
   subscripcion;
   
@@ -23,7 +23,7 @@ export class RegistrarsePage implements OnInit {
     this.registerForm = this.formBuilder.group({
       correo: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'), Validators.required])],
       clave: ['', Validators.compose([Validators.maxLength(20), Validators.required])],
-      clave2: ['', Validators.compose([Validators.maxLength(20), Validators.required])],
+      //clave2: ['', Validators.compose([Validators.maxLength(20), Validators.required])],
       sexo: ['', Validators.compose([Validators.required])],
       perfil: ['', Validators.compose([Validators.required])],
     });
@@ -35,20 +35,37 @@ export class RegistrarsePage implements OnInit {
         }
       }
     );
-
   }
-
+  
   ngOnInit() {
+    this.registerForm.reset();
   }
+  
+  ngOnDestroy() {
+    this.registerForm.reset();
+ }
 
   registrarme(){
-    delete this.registerForm.value.clave2;
-    this.un_usuario = this.registerForm.value;
-    this.un_usuario.id = this.ultimoID+1;
-    //console.log(this.ultimoID);
-    //console.log(this.un_usuario);
-    this.servUsuario.traer_ultimo_ID()
-    this.servUsuario.registrar_usuario(this.un_usuario);
+    let comprobarQuery = this.servUsuario.comprobar_correo(this.registerForm.value.correo).subscribe(
+      (usuario: Usuario[]) => {
+        //console.log(usuario.length);
+        if(usuario.length == 0){
+          //OK, no esta ese mail
+          
+          //delete this.registerForm.value.clave2;
+          this.un_usuario = this.registerForm.value;
+          this.un_usuario.id = this.ultimoID+1;
+          //console.log(this.ultimoID);
+          //console.log(this.un_usuario);
+          this.servUsuario.traer_ultimo_ID()
+          this.servUsuario.registrar_usuario(this.un_usuario);
+        } else {
+          //Error! ese mail ya está
+          this.servUsuario.mostrarMensaje("Ups! Ese mail ya está registrado.");
+        }
+        comprobarQuery.unsubscribe();
+      }
+    );
   }
 
   iniciar_sesion(){
