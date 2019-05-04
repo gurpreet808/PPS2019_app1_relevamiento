@@ -20,10 +20,10 @@
     </ion-card> -->
     <ion-grid *ngIf="this.servUsuario.logueado.value">
       <ion-row>
-        <ion-button style="height: 43.5vh; width:100%;" color="success" (click)="navegar('/lindas')">Cosas LINDAS del edificio</ion-button>
+        <ion-button style="height: 43.5vh; width:100%;" color="success" [routerLink]="['/cosas/', 'linda']">Cosas LINDAS del edificio</ion-button>
       </ion-row>
       <ion-row>
-        <ion-button style="height: 43.5vh; width:100%;" color="danger" (click)="navegar('/')">Cosas FEAS del edificio</ion-button>
+        <ion-button style="height: 43.5vh; width:100%;" color="danger" [routerLink]="['/cosas/', 'fea']">Cosas FEAS del edificio</ion-button>
       </ion-row>
     </ion-grid>
 </ion-content>

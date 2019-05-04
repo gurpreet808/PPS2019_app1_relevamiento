@@ -46,12 +46,12 @@ export class AppComponent {
             },
             {
               title: 'Cosas LINDAS',
-              url: '/lindas',
+              url: '/cosas/linda',
               icon: 'happy'
             },
             {
               title: 'Cosas FEAS',
-              url: '/',
+              url: '/cosas/fea',
               icon: 'sad'
             }
           ];

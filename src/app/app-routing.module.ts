@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'registrarse', loadChildren: './registrarse/registrarse.module#RegistrarsePageModule' },
-  { path: 'lindas', loadChildren: './lindas/lindas.module#LindasPageModule', canActivate: [AuthGuard] }
+  { path: 'cosas/:tipo', loadChildren: './cosas/cosas.module#CosasPageModule', canActivate: [AuthGuard] }
 ];
 
 @NgModule({
