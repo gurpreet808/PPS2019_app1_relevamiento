@@ -16,7 +16,7 @@ export class RegistrarsePage implements OnInit {
   public un_usuario: Usuario;
   showpass: boolean = false;
   //showpass2: boolean = false;
-  ultimoID: number = -1;
+  ultimoID: number = 0;
   subscripcion;
   
   constructor(db: AngularFireDatabase, public servUsuario: UsuarioService, private formBuilder: FormBuilder, public router:Router) { 
@@ -57,7 +57,7 @@ export class RegistrarsePage implements OnInit {
           this.un_usuario.id = this.ultimoID+1;
           //console.log(this.ultimoID);
           //console.log(this.un_usuario);
-          this.servUsuario.traer_ultimo_ID()
+          this.servUsuario.traer_ultimo_ID();
           this.servUsuario.registrar_usuario(this.un_usuario);
         } else {
           //Error! ese mail ya está

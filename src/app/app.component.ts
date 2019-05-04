@@ -10,7 +10,7 @@ import { UsuarioService } from './servicios/usuario.service';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  public splash = false;
+  public splash = true;
 
   public appPages = [];
 
