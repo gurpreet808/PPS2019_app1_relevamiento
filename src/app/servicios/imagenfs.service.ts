@@ -60,30 +60,18 @@ export class ImagenfsService {
     return this.db.list('/imagenes', ref => ref.orderByChild("id").limitToLast(1)).valueChanges();
   }
 
-  sumarVoto(id: number){
-    let votoQuery = this.db.list('/imagenes', ref => ref.orderByChild("id").equalTo(id));
-
-    /* let votoSubscription = votoQuery.snapshotChanges().subscribe(
-      (imagenes) => {
-        console.log(imagenes);
-        votoQuery.set()
-        votoSubscription.unsubscribe();
-      }
-    );
-
-    const items = af.database.list('/items');
-    items.subscribe(
-      list => {
-        const item = list[0];
-        items.update(item, { size: newSize });
-      }
-    ); */
+  sumarVoto(id: number, votos: number){
+    let imagenesRef = this.db.database.ref().child("imagenes");
+    let imagenQuery = imagenesRef.orderByChild('id').equalTo(id);
+    imagenQuery.on("child_added", function (snapshot) {
+      snapshot.ref.update({ votos: votos })
+    });
   }
 
   async mostrarMensaje(text: string) {
     let toast = await this.toastCtrl.create({
       message: text,
-      duration: 3500
+      duration: 3000
     });
     toast.present();
   }

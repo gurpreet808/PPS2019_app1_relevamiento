@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ToastController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
-import { FirebaseApp } from 'angularfire2';
-import { storage } from 'firebase';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { isObject } from 'util';
 import { stringify } from 'querystring';
 import { UsuarioService } from '../servicios/usuario.service';
@@ -29,11 +28,13 @@ export class CosasPage implements OnInit {
   constructor(
     private camara: Camera, 
     public toastCtrl: ToastController, 
-    device: Platform, public servUsuario: 
-    UsuarioService, public servImagenes: 
-    ImagenfsService, 
+    device: Platform, 
+    public servUsuario: UsuarioService, 
+    public servImagenes: ImagenfsService, 
     public loadingController: LoadingController,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private afs: AngularFireStorage) {
+
     //this.esMobile = device.is("cordova");
     this.servImagenes.traer_ultimo_ID().subscribe(
       (datos: ImagenFS[]) =>{
@@ -80,14 +81,14 @@ export class CosasPage implements OnInit {
     this.presentLoading();
 
     try {
-      let storageRef = storage().ref();
+      let storageRef = this.afs.storage.ref();
       this.ahora();
   
       const nombreArchivo = this.servUsuario.el_usuario.correo+" "+this.horaActual;
   
       const imageRef = storageRef.child(`imagenes/${nombreArchivo}.jpg`);
   
-      imageRef.putString(this.imagen, storage.StringFormat.DATA_URL).then(
+      imageRef.putString(this.imagen, 'data_url').then(
         (snapshot)=> {
           imageRef.getDownloadURL().then(
             (datos) => {
@@ -126,13 +127,14 @@ export class CosasPage implements OnInit {
   async mostrarMensaje(text: string) {
     let toast = await this.toastCtrl.create({
       message: text,
-      duration: 3500
+      duration: 3000
     });
     toast.present();
   }
 
-  votar(id: number){
-    this.servImagenes.sumarVoto(id);
+  votar(id: number, votos: number){
+    votos++;
+    this.servImagenes.sumarVoto(id, votos);
   }
 
   tipoArray(){

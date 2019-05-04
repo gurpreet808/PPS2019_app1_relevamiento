@@ -71,7 +71,7 @@ export class UsuarioService {
   async mostrarMensaje(text: string) {
     let toast = await this.toastCtrl.create({
       message: text,
-      duration: 3500
+      duration: 3000
     });
     toast.present();
   }

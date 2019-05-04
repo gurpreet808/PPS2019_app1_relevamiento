@@ -24,7 +24,7 @@
       <p>Subido por: {{item.usuario}}</p>
       <p>Fecha de subida: {{item.fecha_subida}}</p>
       <p>Votos: {{item.votos}}</p>
-      <ion-button expand="block" [color]="item.tipo === 'linda' ? 'success' : 'danger'" (click)="votar(item.id)">Votar</ion-button>
+      <ion-button expand="block" [color]="item.tipo === 'linda' ? 'success' : 'danger'" (click)="votar(item.id, item.votos)">Votar</ion-button>
     </ion-card-content>
   </ion-card>
 
