@@ -87,7 +87,7 @@ export class ImagenfsService {
             }
           );
         } else {
-          this.mostrarMensaje("Ya hs votado esta foto...");
+          this.mostrarMensaje("Ya has votado esta foto...");
         }
         votosQuery.unsubscribe();
       }
