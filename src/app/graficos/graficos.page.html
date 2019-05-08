@@ -1,9 +1,50 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>graficos</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Gráficos
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Cosas FEAS</ion-card-subtitle>
+    </ion-card-header>
 
+    <ion-card-content>
+      <div style="display: block">
+        <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+        </canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Cosas LINDAS</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="chart">
+        <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"
+          [options]="pieChartOptions"
+          [legend]="pieChartLegend"
+          (chartClick)="chartClicked($event)"
+          >
+        </canvas>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

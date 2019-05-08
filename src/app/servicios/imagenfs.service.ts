@@ -8,9 +8,9 @@ import { ImagenFS } from '../clases/imagenfs';
 })
 export class ImagenfsService {
 
-  public imagenesLindas: ImagenFS[];
-  public imagenesFeas: ImagenFS[];
-  public
+  public imagenesLindas: ImagenFS[] = [];
+  public imagenesFeas: ImagenFS[] = [];
+  public lindasQuery;
 
   constructor(public db: AngularFireDatabase, public toastCtrl: ToastController) {
     
@@ -31,9 +31,13 @@ export class ImagenfsService {
       (imagenes: ImagenFS[]) => {
         this.imagenesFeas = imagenes.sort((a,b) => b.fecha_subida.localeCompare(a.fecha_subida));
         console.log(this.imagenesFeas);
-        //lindasQuery.unsubscribe();
+        //feasQuery.unsubscribe();
       }
     );
+  }
+
+  traerImagenPorID(id: number){
+    return this.db.list('/imagenes', ref => ref.orderByChild("id").equalTo(id)).valueChanges();
   }
 
   public traerMisFotos(usuario: string){
