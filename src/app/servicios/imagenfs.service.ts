@@ -36,6 +36,10 @@ export class ImagenfsService {
     );
   }
 
+  public traerMisFotos(usuario: string){
+    return this.db.list('/imagenes', ref => ref.orderByChild("usuario").equalTo(usuario)).valueChanges();
+  }
+
   traerTodas(){
     return this.db.list('/imagenes', ref => ref.orderByChild("tipo").equalTo("fea")).valueChanges();
   }

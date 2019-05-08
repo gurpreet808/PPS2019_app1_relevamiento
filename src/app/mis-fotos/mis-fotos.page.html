@@ -1,9 +1,28 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>misFotos</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Mis fotos
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <ion-card *ngFor="let item of misFotos">
+    <ion-img [src]="item.url"></ion-img>
+    <ion-card-content [ngStyle]="{'background-color':item.tipo === 'linda' ? 'mediumspringgreen' : 'lightcoral' }">
+      <p>Subido por: {{item.usuario}}</p>
+      <p>Fecha de subida: {{item.fecha_subida}}</p>
+      <p>Votos: {{item.votos}}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="misFotos.length == 0">
+    <ion-card-content>
+      <ion-card-subtitle>No has subido ninguna foto :(</ion-card-subtitle>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
