@@ -134,7 +134,7 @@ export class CosasPage implements OnInit {
 
   votar(id: number, votos: number){
     votos++;
-    this.servImagenes.sumarVoto(id, votos);
+    this.servImagenes.sumarVoto(id, this.servUsuario.el_usuario.id, votos);
   }
 
   tipoArray(){

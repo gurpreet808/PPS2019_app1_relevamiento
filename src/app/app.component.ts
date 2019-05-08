@@ -53,6 +53,16 @@ export class AppComponent {
               title: 'Cosas FEAS',
               url: '/cosas/fea',
               icon: 'sad'
+            },
+            {
+              title: 'Mis fotos',
+              url: '/mis-fotos',
+              icon: 'images'
+            },
+            {
+              title: 'Estadísticas',
+              url: '/graficos',
+              icon: 'stats'
             }
           ];
         }

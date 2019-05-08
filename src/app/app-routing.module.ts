@@ -11,7 +11,9 @@ const routes: Routes = [
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'registrarse', loadChildren: './registrarse/registrarse.module#RegistrarsePageModule' },
-  { path: 'cosas/:tipo', loadChildren: './cosas/cosas.module#CosasPageModule', canActivate: [AuthGuard] }
+  { path: 'cosas/:tipo', loadChildren: './cosas/cosas.module#CosasPageModule', canActivate: [AuthGuard] },
+  { path: 'mis-fotos', loadChildren: './mis-fotos/mis-fotos.module#MisFotosPageModule', canActivate: [AuthGuard] },
+  { path: 'graficos', loadChildren: './graficos/graficos.module#GraficosPageModule', canActivate: [AuthGuard] }
 ];
 
 @NgModule({

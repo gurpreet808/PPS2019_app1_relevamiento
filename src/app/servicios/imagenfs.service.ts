@@ -60,12 +60,42 @@ export class ImagenfsService {
     return this.db.list('/imagenes', ref => ref.orderByChild("id").limitToLast(1)).valueChanges();
   }
 
-  sumarVoto(id: number, votos: number){
-    let imagenesRef = this.db.database.ref().child("imagenes");
-    let imagenQuery = imagenesRef.orderByChild('id').equalTo(id);
-    imagenQuery.on("child_added", function (snapshot) {
-      snapshot.ref.update({ votos: votos })
-    });
+  sumarVoto(id_foto: number, id_usuario: number, cantVotos: number){
+    let id_voto = id_foto+"@"+id_usuario;
+
+    let votosQuery = this.db.list('/votos', ref => ref.orderByChild("id").equalTo(id_voto)).valueChanges().subscribe(
+      (votos) => {
+        //console.log(votos);
+        if (votos.length == 0) {
+          let imagenesRef = this.db.database.ref().child("imagenes");
+          let imagenQuery = imagenesRef.orderByChild('id').equalTo(id_foto);
+          imagenQuery.on("child_added", function (snapshot) {
+            snapshot.ref.update({ votos: cantVotos })
+          });
+
+          let itemsRef = this.db.list('votos');
+          itemsRef.push({id:id_voto})
+          .then( 
+            datos => {
+              //console.log(datos);
+              this.mostrarMensaje("Gracias! Se registró tu voto");
+            }
+          )
+          .catch(
+            err => {
+              this.mostrarMensaje("Hubo un error inténtalo de nuevo...");
+            }
+          );
+        } else {
+          this.mostrarMensaje("Ya hs votado esta foto...");
+        }
+        votosQuery.unsubscribe();
+      }
+    );
+
+  }
+
+  revisarVoto(id_foto: number){
   }
 
   async mostrarMensaje(text: string) {
